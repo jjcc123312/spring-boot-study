@@ -2,8 +2,10 @@ package com.jjcc.bootlaunch.controller;
 
 import com.jjcc.bootlaunch.config.exception.AjaxResponse;
 import com.jjcc.bootlaunch.model.Article;
+import com.jjcc.bootlaunch.model.Family;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/rest", produces = "application/json")
 public class ArticleRestController {
+
+    @Autowired
+    private Family family;
 
     /**
      * 增加
@@ -91,5 +96,12 @@ public class ArticleRestController {
         Article.ArticleBuilder jjcc = Article.builder().id(1L).author("jjcc").content("asdasdasd");
 
         return AjaxResponse.success(jjcc);
+    }
+
+    @ApiOperation("获取yml文件中的值")
+    @GetMapping("family.json")
+    public Object getFamilyMethod() {
+
+        return family;
     }
 }

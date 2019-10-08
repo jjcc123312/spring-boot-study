@@ -1,10 +1,7 @@
-server:
-  port: 8888
 spring:
-  http:
-    encoding:
-      charset: utf-8
-      force: false
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
+  profiles:
+    active: dev
+
+jasypt:
+  encryptor:
+    password: jjcc

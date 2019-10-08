@@ -2,6 +2,7 @@ package com.jjcc.bootlaunch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author Administrator
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @createTime 2019年10月04日 17:38:00
  */
 @SpringBootApplication
+@EnableSwagger2
 public class BootLaunchApplication {
 
     public static void main(String[] args) {
