@@ -1,4 +1,4 @@
-package com.jjcc.bootlaunch.config;
+package com.jjcc.bootlaunch.config.beanconfig;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
+ * 用于注解的方式导入yml/xml格式的配置文件
  * @author Jjcc
  * @version 1.0.0
  * @description
