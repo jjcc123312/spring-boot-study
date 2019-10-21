@@ -1,6 +1,8 @@
 package com.jjcc.bootlaunch.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjcc.bootlaunch.generator.test1.TableStudentMapper;
 import com.jjcc.bootlaunch.model.TableStudent;
@@ -27,6 +29,11 @@ public class TableStudentServiceImpl extends ServiceImpl<TableStudentMapper, Tab
     @Override
     public List<TableStudent> selectAll() {
         return tableStudentMapper.selectList(null);
+    }
+
+    @Override
+    public IPage<TableStudent> selectPage(Page<TableStudent> page) {
+        return tableStudentMapper.selectPageVo(page);
     }
 
 }

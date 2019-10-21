@@ -1,5 +1,7 @@
 package com.jjcc.bootlaunch.config.datasource;
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -47,24 +49,22 @@ public class SecondaryDataSourceConfig {
     @Value("${mybatis-plus.type-aliases-package}")
     private String typeAliasesPackage;
 
-    @Value("${mybatis-plus.configuration.map-underscore-to-camel-case}")
-    private boolean mapUnderscoreToCamelCase;
 
     @Bean(name = "secondarySqlSessionFactory")
-    public SqlSessionFactory testSqlSessionFactory(@Qualifier("secondaryDataSource") DataSource dataSource) throws Exception {
+    public SqlSessionFactory testSqlSessionFactory(@Qualifier("secondaryDataSource") DataSource dataSource,
+                                                   @Qualifier("mybatisConfiguration") MybatisConfiguration configuration,
+                                                   @Qualifier("globalConfig") GlobalConfig globalConfig) throws Exception {
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
-
         bean.setDataSource(dataSource);
         //指定mapper.xml路径
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().
                 getResources(mapperLocations));
-        //增加驼峰配置
-//        com.baomidou.mybatisplus.core.MybatisConfiguration configuration = new com.baomidou.mybatisplus.core.MybatisConfiguration();
-//        configuration.setMapUnderscoreToCamelCase(mapUnderscoreToCamelCase);
-//        //别名
-//        bean.setTypeAliasesPackage(typeAliasesPackage);
-//
-//        bean.setConfiguration(configuration);
+
+        bean.setTypeAliasesPackage(typeAliasesPackage);
+
+        bean.setConfiguration(configuration);
+
+        bean.setGlobalConfig(globalConfig);
         return bean.getObject();
     }
 

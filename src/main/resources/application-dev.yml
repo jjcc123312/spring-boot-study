@@ -86,7 +86,7 @@ spring:
 
 # mybatis-plus
 mybatis-plus:
-  mapper-locations: classpath:mybatis/mapping/*.xml
+  mapper-locations: classpath:mybatis/mapping/*Mapper.xml
   type-aliases-package: com.jjcc.bootlaunch.model
   configuration:
     # 驼峰下划线转换

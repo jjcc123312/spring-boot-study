@@ -1,9 +1,10 @@
 package com.jjcc.bootlaunch.config.datasource;
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,32 +29,33 @@ import javax.sql.DataSource;
 public class PrimaryDataSourceConfig {
 
 
+
     @Value("${mybatis-plus.mapper-locations}")
     private String mapperLocations;
 
     @Value("${mybatis-plus.type-aliases-package}")
     private String typeAliasesPackage;
 
-    @Value("${mybatis-plus.configuration.map-underscore-to-camel-case}")
-    private boolean mapUnderscoreToCamelCase;
-
     @Bean(name = "primarySqlSessionFactory")
     @Primary
-    public SqlSessionFactory testSqlSessionFactory(@Qualifier("primaryDataSource") DataSource dataSource) throws Exception {
+    public SqlSessionFactory testSqlSessionFactory(@Qualifier("primaryDataSource") DataSource dataSource,
+                                                   @Qualifier("mybatisConfiguration") MybatisConfiguration configuration,
+                                                   @Qualifier("globalConfig") GlobalConfig globalConfig) throws Exception {
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         //指定mapper.xml路径
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().
                 getResources(mapperLocations));
-        //增加驼峰配置
-//        com.baomidou.mybatisplus.core.MybatisConfiguration configuration = new com.baomidou.mybatisplus.core.MybatisConfiguration();
-//        configuration.setMapUnderscoreToCamelCase(mapUnderscoreToCamelCase);
-//        //别名
-//        bean.setTypeAliasesPackage(typeAliasesPackage);
-//
-//        bean.setConfiguration(configuration);
+
+        bean.setTypeAliasesPackage(typeAliasesPackage);
+
+        bean.setConfiguration(configuration);
+
+        bean.setGlobalConfig(globalConfig);
+
         return bean.getObject();
     }
+
 
 //    /**
 //     * 添加单数据源事务

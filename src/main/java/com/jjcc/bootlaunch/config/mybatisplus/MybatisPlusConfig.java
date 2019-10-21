@@ -1,7 +1,12 @@
 package com.jjcc.bootlaunch.config.mybatisplus;
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -49,10 +54,29 @@ public class MybatisPlusConfig {
      * @return com.baomidou.mybatisplus.core.injector.ISqlInjector
      * @createTime 2019/10/20 17:53
      */
-//    @Bean
-//    public ISqlInjector sqlInjector() {
-//        return new LogicSqlInjector();
-//    }
+    @Bean
+    public ISqlInjector sqlInjector() {
+        return new LogicSqlInjector();
+    }
+
+    /**
+     * 加载配置文件中mybatis-plus的配置信息，配置多数据源所需要
+     * @title mybatisConfiguration
+     * @author Jjcc
+     * @return com.baomidou.mybatisplus.core.MybatisConfiguration
+     * @createTime 2019/10/21 23:22
+     */
+    @Bean("mybatisConfiguration")
+    @ConfigurationProperties(prefix = "mybatis-plus.configuration")
+    public MybatisConfiguration mybatisConfiguration () {
+        return new MybatisConfiguration();
+    }
+
+    @Bean("globalConfig")
+    @ConfigurationProperties(prefix = "mybatis-plus.global-config")
+    public GlobalConfig globalConfig() {
+        return new GlobalConfig();
+    }
 
 
 }
