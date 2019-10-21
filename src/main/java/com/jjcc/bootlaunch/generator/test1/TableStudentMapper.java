@@ -20,5 +20,6 @@ public interface TableStudentMapper extends BaseMapper<TableStudent> {
     @Select("select id, name, sex, age, class_ids as classIds from table_student")
     List<TableStudent> selectAll();
 
-//    List<TableStudent> selectList();
+    @Override
+    List<TableStudent> selectList(Wrapper<TableStudent> queryWrapper);
 }

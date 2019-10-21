@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +48,7 @@ public class TableStudentController {
         } catch (Exception e) {
             log.error("!!!!!!!!!!!!!!!");
             e.printStackTrace();
-            throw new CustomException(CustomExceptionType.SYSTEM_ERROR, "查询错误");
+            throw new CustomException(CustomExceptionType.SYSTEM_ERROR, "getTableStud方法错误");
         }
 
         return AjaxResponse.success(list);

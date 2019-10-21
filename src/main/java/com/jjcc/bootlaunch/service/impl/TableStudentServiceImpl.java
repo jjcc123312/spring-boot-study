@@ -1,12 +1,13 @@
 package com.jjcc.bootlaunch.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjcc.bootlaunch.generator.test1.TableStudentMapper;
 import com.jjcc.bootlaunch.model.TableStudent;
 import com.jjcc.bootlaunch.service.TableStudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,11 +21,12 @@ import java.util.List;
 @Service
 public class TableStudentServiceImpl extends ServiceImpl<TableStudentMapper, TableStudent> implements TableStudentService {
 
-    @Resource
+    @Autowired
     private TableStudentMapper tableStudentMapper;
 
     @Override
     public List<TableStudent> selectAll() {
-        return tableStudentMapper.selectAll();
+        return tableStudentMapper.selectList(null);
     }
+
 }

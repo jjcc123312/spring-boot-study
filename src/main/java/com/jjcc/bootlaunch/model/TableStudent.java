@@ -1,6 +1,7 @@
 package com.jjcc.bootlaunch.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@TableName("table_student")
 public class TableStudent extends Model<TableStudent> {
 
     private static final long serialVersionUID = 1L;

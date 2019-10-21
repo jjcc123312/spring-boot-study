@@ -84,16 +84,9 @@ spring:
     # enabled为false, 禁用JTA自动配置功能。默认为true
     enabled: true
 
-#mybatis:
-#  mapper-locations: classpath:mybatis/mapping/*Mapper.xml
-#  type-aliases-package: com.jjcc.bootlaunch.model
-##  config-location: classpath:classpath:mapping/*/*Mapper.xml
-#  configuration:
-#    map-underscore-to-camel-case: true
-
 # mybatis-plus
 mybatis-plus:
-  mapper-locations: classpath:/mybatis/mapping/*Mapper.xml
+  mapper-locations: classpath:mybatis/mapping/*.xml
   type-aliases-package: com.jjcc.bootlaunch.model
   configuration:
     # 驼峰下划线转换
@@ -104,7 +97,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     # 刷新mapper 调试神器
-    refresh: true
+#    refresh: true
     banner: false
     #序列接口实现类配置
     #key-generator: com.baomidou.springboot.xxx

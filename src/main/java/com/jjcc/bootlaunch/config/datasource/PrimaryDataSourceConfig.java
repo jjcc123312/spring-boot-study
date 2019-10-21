@@ -1,5 +1,6 @@
 package com.jjcc.bootlaunch.config.datasource;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,9 +21,9 @@ import javax.sql.DataSource;
  * @className PrimaryDataSourceConfig.java
  * @createTime 2019年10月10日 10:48:00
  */
+@Slf4j
 @Configuration
-@MapperScan(basePackages = "com.jjcc.bootlaunch.generator.test1*",
-        sqlSessionTemplateRef = "primarySqlSessionTemplate")
+@MapperScan(value = "com.jjcc.bootlaunch.generator.test1*", sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDataSourceConfig {
 
 
