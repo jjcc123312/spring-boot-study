@@ -21,18 +21,18 @@ import javax.sql.DataSource;
  * @createTime 2019年10月10日 10:48:00
  */
 @Configuration
-@MapperScan(basePackages = "com.jjcc.bootlaunch.generator.test1",
+@MapperScan(basePackages = "com.jjcc.bootlaunch.generator.test1*",
         sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDataSourceConfig {
 
 
-    @Value("${mybatis.mapper-locations}")
+    @Value("${mybatis-plus.mapper-locations}")
     private String mapperLocations;
 
-    @Value("${mybatis.type-aliases-package}")
+    @Value("${mybatis-plus.type-aliases-package}")
     private String typeAliasesPackage;
 
-    @Value("${mybatis.configuration.map-underscore-to-camel-case}")
+    @Value("${mybatis-plus.configuration.map-underscore-to-camel-case}")
     private boolean mapUnderscoreToCamelCase;
 
     @Bean(name = "primarySqlSessionFactory")

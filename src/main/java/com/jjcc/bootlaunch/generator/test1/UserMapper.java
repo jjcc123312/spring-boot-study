@@ -50,4 +50,14 @@ public interface UserMapper {
 
      @Insert("insert into user values(null, #{user.username}, #{user.password})")
      int saveUserInfo(@Param("user") User user);
+
+    /**
+     * 条件查询user信息
+     * @title selectUserDispose
+     * @author Jjcc
+     * @param user 用户信息
+     * @return java.util.List<com.jjcc.bootlaunch.model.User>
+     * @createTime 2019/10/19 21:17
+     */
+     List<User> selectUserDispose(@Param("user") User user);
 }

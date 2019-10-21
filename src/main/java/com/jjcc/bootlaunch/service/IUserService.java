@@ -1,5 +1,6 @@
 package com.jjcc.bootlaunch.service;
 
+import com.jjcc.bootlaunch.config.exception.CustomException;
 import com.jjcc.bootlaunch.model.User;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface IUserService {
      * @author Jjcc
      * @return java.util.List<com.jjcc.bootlaunch.model.User>
      * @createTime 2019/10/9 17:26
-     * @throws
+     * @throws CustomException
      */
     List<User> getUserAll();
 
@@ -82,4 +83,14 @@ public interface IUserService {
      * @createTime 2019/10/11 23:48
      */
     User selectUserInfoLockTest1(Integer id);
+
+    /**
+     * 条件查询user信息
+     * @title selectUserDispose
+     * @author Jjcc
+     * @param user
+     * @return java.util.List<com.jjcc.bootlaunch.model.User>
+     * @createTime 2019/10/19 21:17
+     */
+    List<User> selectUserDispose(User user);
 }

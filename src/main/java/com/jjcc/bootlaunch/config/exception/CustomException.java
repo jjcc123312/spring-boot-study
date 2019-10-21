@@ -1,31 +1,31 @@
 package com.jjcc.bootlaunch.config.exception;
 
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
- * @author Administrator
+ * 自定义异常
+ * @author Jjcc
  * @version 1.0.0
- * @description
- * @className ArticleRestController.java
- * @createTime 2019年10月05日 10:38:00
+ * @className AjaxResponse.java
+ * @createTime 2019年10月17日 23:04:00
  */
-public class CustomException extends RuntimeException {
-    //异常错误编码
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class CustomException extends RuntimeException{
+
+    /**
+     * 异常错误编码
+     */
     private int code ;
-    //异常信息
+    /**
+     * 异常信息
+     */
     private String message;
 
-    private CustomException(){}
-
-    public CustomException(CustomExceptionType exceptionTypeEnum, String message) {
-        this.code = exceptionTypeEnum.getCode();
+    public CustomException(CustomExceptionType customExceptionType, String message) {
+        this.code = customExceptionType.getCode();
         this.message = message;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 }
