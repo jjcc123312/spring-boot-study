@@ -1,10 +1,9 @@
 package com.jjcc.bootlaunch;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
@@ -17,14 +16,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @ServletComponentScan
-public class BootLaunchApplication extends SpringBootServletInitializer {
+@MapperScan("com.jjcc.bootlaunch.generator")
+public class BootLaunchApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BootLaunchApplication.class, args);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(BootLaunchApplication.class);
-    }
 }

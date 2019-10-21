@@ -1,9 +1,7 @@
-package com.jjcc.bootlaunch.generator.test2;
+package com.jjcc.bootlaunch.generator;
 
 import com.jjcc.bootlaunch.model.User;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -14,7 +12,7 @@ import java.util.List;
  * @className UserMapper.java
  * @createTime 2019年10月09日 14:58:00
  */
-public interface User2Mapper {
+public interface UserMapper {
 
     /**
      * 获取所有信息
@@ -48,9 +46,16 @@ public interface User2Mapper {
      int deleteUserInfo(Integer id);
 
 
-     @Select("select id, username, password from user")
-     User getUserInfoMethod(Integer id);
+//     @Insert("insert into user values(null, #{user.username}, #{user.password})")
+//     int saveUserInfo(@Param("user") User user);
 
-    @Insert("insert into user values(null, #{user.username}, #{user.password})")
-    int saveUserInfo(@Param("user") User user);
+    /**
+     * 条件查询user信息
+     * @title selectUserDispose
+     * @author Jjcc
+     * @param user 用户信息
+     * @return java.util.List<com.jjcc.bootlaunch.model.User>
+     * @createTime 2019/10/19 21:17
+     */
+     List<User> selectUserDispose(@Param("user") User user);
 }
