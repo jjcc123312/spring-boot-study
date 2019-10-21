@@ -1,7 +1,7 @@
 package com.jjcc.bootlaunch.service.impl;
 
 import com.jjcc.bootlaunch.model.TableStudent;
-import com.jjcc.bootlaunch.generator.test1.TableStudentMapper;
+import com.jjcc.bootlaunch.generator.TableStudentMapper;
 import com.jjcc.bootlaunch.service.TableStudentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

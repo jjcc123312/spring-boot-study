@@ -5,9 +5,9 @@ import com.jjcc.bootlaunch.config.exception.CustomExceptionType;
 import com.jjcc.bootlaunch.generator.UserMapper;
 import com.jjcc.bootlaunch.model.User;
 import com.jjcc.bootlaunch.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements IUserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper1;
 
     @Override

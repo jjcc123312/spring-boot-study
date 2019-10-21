@@ -51,10 +51,10 @@ public class MybatisPlusConfig {
      * @return com.baomidou.mybatisplus.core.injector.ISqlInjector
      * @createTime 2019/10/20 17:53
      */
-    @Bean
-    public ISqlInjector sqlInjector() {
-        return new LogicSqlInjector();
-    }
+//    @Bean
+//    public ISqlInjector sqlInjector() {
+//        return new LogicSqlInjector();
+//    }
 
 
 }

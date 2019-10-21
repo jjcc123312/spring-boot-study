@@ -1,4 +1,4 @@
-package com.jjcc.bootlaunch.generator.test1;
+package com.jjcc.bootlaunch.generator;
 
 import com.jjcc.bootlaunch.model.TableStudent;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
