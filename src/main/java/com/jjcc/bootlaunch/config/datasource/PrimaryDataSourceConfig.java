@@ -1,5 +1,6 @@
 package com.jjcc.bootlaunch.config.datasource;
 
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -39,18 +40,18 @@ public class PrimaryDataSourceConfig {
     @Bean(name = "primarySqlSessionFactory")
     @Primary
     public SqlSessionFactory testSqlSessionFactory(@Qualifier("primaryDataSource") DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         //指定mapper.xml路径
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().
                 getResources(mapperLocations));
         //增加驼峰配置
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
-        configuration.setMapUnderscoreToCamelCase(mapUnderscoreToCamelCase);
-        //别名
-        bean.setTypeAliasesPackage(typeAliasesPackage);
-
-        bean.setConfiguration(configuration);
+//        com.baomidou.mybatisplus.core.MybatisConfiguration configuration = new com.baomidou.mybatisplus.core.MybatisConfiguration();
+//        configuration.setMapUnderscoreToCamelCase(mapUnderscoreToCamelCase);
+//        //别名
+//        bean.setTypeAliasesPackage(typeAliasesPackage);
+//
+//        bean.setConfiguration(configuration);
         return bean.getObject();
     }
 

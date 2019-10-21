@@ -1,8 +1,8 @@
 package com.jjcc.bootlaunch.generator.test1;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jjcc.bootlaunch.model.TableStudent;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -15,11 +15,10 @@ import java.util.List;
  * @author Jjcc
  * @since 2019-10-20
  */
+@Mapper
 public interface TableStudentMapper extends BaseMapper<TableStudent> {
 
     @Select("select id, name, sex, age, class_ids as classIds from table_student")
     List<TableStudent> selectAll();
 
-    @Override
-    List<TableStudent> selectList(Wrapper<TableStudent> queryWrapper);
 }
