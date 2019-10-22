@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Profile;
 
 /**
  * mybatis-plus配置文件
+ * 注册成bena的方式开启插件在多数据源情况下是无效的；需要手动加载至Configuration对象中
  * @author Jjcc
  * @version 1.0.0
  * @className MybatisPlusConfig.java
@@ -63,15 +65,20 @@ public class MybatisPlusConfig {
      * 加载配置文件中mybatis-plus的配置信息，配置多数据源所需要
      * @title mybatisConfiguration
      * @author Jjcc
+     * @param paginationInterceptor 分页插件
+     * @param performanceInterceptor SQL执行效率插件
      * @return com.baomidou.mybatisplus.core.MybatisConfiguration
-     * @createTime 2019/10/21 23:22
+     * @createTime 2019/10/22 9:23
      */
     @Bean("mybatisConfiguration")
     @ConfigurationProperties(prefix = "mybatis-plus.configuration")
-    public MybatisConfiguration mybatisConfiguration () {
-        return new MybatisConfiguration();
+    public MybatisConfiguration mybatisConfiguration (@Qualifier("paginationInterceptor") PaginationInterceptor paginationInterceptor,
+                                                      @Qualifier("performanceInterceptor") PerformanceInterceptor performanceInterceptor) {
+        MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
+        mybatisConfiguration.addInterceptor(paginationInterceptor);
+        mybatisConfiguration.addInterceptor(performanceInterceptor);
+        return mybatisConfiguration;
     }
-
     @Bean("globalConfig")
     @ConfigurationProperties(prefix = "mybatis-plus.global-config")
     public GlobalConfig globalConfig() {
