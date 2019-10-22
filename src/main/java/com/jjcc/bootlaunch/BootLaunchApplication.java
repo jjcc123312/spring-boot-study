@@ -16,7 +16,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @SpringBootApplication
 @EnableSwagger2
-@ServletComponentScan
 public class BootLaunchApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

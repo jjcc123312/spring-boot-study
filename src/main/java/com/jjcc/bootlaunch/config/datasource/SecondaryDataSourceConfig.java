@@ -1,5 +1,8 @@
 package com.jjcc.bootlaunch.config.datasource;
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -21,7 +23,7 @@ import javax.sql.DataSource;
  * @createTime 2019年10月10日 11:09:00
  */
 @Configuration
-@MapperScan(basePackages = "com.jjcc.bootlaunch.generator.test2",
+@MapperScan(value = "com.jjcc.bootlaunch.generator.test2*",
         sqlSessionTemplateRef = "secondarySqlSessionTemplate")
 public class SecondaryDataSourceConfig {
 
@@ -41,30 +43,28 @@ public class SecondaryDataSourceConfig {
 //        return ds;
 //    }
 
-    @Value("${mybatis.mapper-locations}")
+    @Value("${mybatis-plus.mapper-locations}")
     private String mapperLocations;
 
-    @Value("${mybatis.type-aliases-package}")
+    @Value("${mybatis-plus.type-aliases-package}")
     private String typeAliasesPackage;
 
-    @Value("${mybatis.configuration.map-underscore-to-camel-case}")
-    private boolean mapUnderscoreToCamelCase;
 
     @Bean(name = "secondarySqlSessionFactory")
-    public SqlSessionFactory testSqlSessionFactory(@Qualifier("secondaryDataSource") DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-
+    public SqlSessionFactory testSqlSessionFactory(@Qualifier("secondaryDataSource") DataSource dataSource,
+                                                   @Qualifier("mybatisConfiguration") MybatisConfiguration configuration,
+                                                   @Qualifier("globalConfig") GlobalConfig globalConfig) throws Exception {
+        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         //指定mapper.xml路径
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().
                 getResources(mapperLocations));
-        //增加驼峰配置
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
-        configuration.setMapUnderscoreToCamelCase(mapUnderscoreToCamelCase);
-        //别名
+
         bean.setTypeAliasesPackage(typeAliasesPackage);
 
         bean.setConfiguration(configuration);
+
+        bean.setGlobalConfig(globalConfig);
         return bean.getObject();
     }
 

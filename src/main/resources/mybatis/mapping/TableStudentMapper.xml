@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjcc.bootlaunch.generator.test1.TableStudentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jjcc.bootlaunch.model.TableStudent">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="age" property="age" />
+        <result column="class_ids" property="classIds" />
+    </resultMap>
+    <select id="selectPageVo" resultType="com.jjcc.bootlaunch.model.TableStudent">
+        select id, name, sex, age, class_ids as classIds from table_student
+    </select>
+    <!--    <select id="selectList" resultMap="BaseResultMap">-->
+<!--        select id, name, sex, age, class_ids as classIds from table_student-->
+<!--    </select>-->
+
+</mapper>

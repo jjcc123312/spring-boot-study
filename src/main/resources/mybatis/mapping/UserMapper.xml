@@ -8,17 +8,36 @@
         <result column="password" jdbcType="VARCHAR" property="password" />
     </resultMap>
 
+    <sql id="user_column">
+        id, username, password
+    </sql>
 
     <delete id="deleteUserInfo">
         delete from user where id = #{id}
     </delete>
 
     <select id="getUserAll" resultMap="BaseResultMap">
-        select * from user
+        select <include refid="user_column"/> from user
     </select>
 
     <select id="getUserInfo" resultMap="BaseResultMap">
-        select * from user where id = #{id}
+        select <include refid="user_column"/> from user where id = #{id}
+    </select>
+
+
+    <select id="selectUserDispose" resultType="com.jjcc.bootlaunch.model.User">
+        select <include refid="user_column"/> from user
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="user.id != null">
+                and id = #{user.id}
+            </if>
+            <if test="user.username != null and user.username != '' ">
+                and username = #{user.username}
+            </if>
+            <if test="user.password != null and user.password != '' ">
+                and password = #{user.password}
+            </if>
+        </trim>
     </select>
 
 

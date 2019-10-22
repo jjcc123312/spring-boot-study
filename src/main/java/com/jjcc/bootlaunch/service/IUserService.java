@@ -1,5 +1,6 @@
 package com.jjcc.bootlaunch.service;
 
+import com.jjcc.bootlaunch.config.exception.CustomException;
 import com.jjcc.bootlaunch.model.User;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface IUserService {
      * @author Jjcc
      * @return java.util.List<com.jjcc.bootlaunch.model.User>
      * @createTime 2019/10/9 17:26
-     * @throws
+     * @throws CustomException
      */
     List<User> getUserAll();
 
@@ -34,34 +35,7 @@ public interface IUserService {
      */
     int deleteUserInfo(Integer id);
 
-    /**
-     * 删除不同数据源的数据
-     * @title deleteUserInfos
-     * @author Jjcc
-     * @param args1
-     * @param arge2
-     * @return int
-     * @createTime 2019/10/10 11:53
-     */
-    int deleteUserInfos(Integer args1, Integer arge2);
 
-    /**
-     * 查询次库数据
-     * @title getSlaveUserInfoAll
-     * @author Jjcc
-     * @return java.util.List<com.jjcc.bootlaunch.model.User>
-     * @createTime 2019/10/11 14:28
-     */
-    List<User> getSlaveUserInfoAll();
-
-    /**
-     * 添加用户信息
-     * @title saveUseInfo
-     * @author Jjcc
-     * @return int
-     * @createTime 2019/10/11 17:08
-     */
-    int saveUseInfo(User user);
 
     /**
      * 获取指定数据1
@@ -82,4 +56,14 @@ public interface IUserService {
      * @createTime 2019/10/11 23:48
      */
     User selectUserInfoLockTest1(Integer id);
+
+    /**
+     * 条件查询user信息
+     * @title selectUserDispose
+     * @author Jjcc
+     * @param user
+     * @return java.util.List<com.jjcc.bootlaunch.model.User>
+     * @createTime 2019/10/19 21:17
+     */
+    List<User> selectUserDispose(User user);
 }

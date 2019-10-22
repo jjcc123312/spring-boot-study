@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /**
@@ -20,8 +22,10 @@ import java.io.Serializable;
 @Builder
 public class User implements Serializable {
 
+    @Min(value = 1, message = "用户id必须是1-5")
     private Integer id;
 
+    @Length(min = 1, max = 10, message = "用户长度范围1-10")
     private String username;
 
     private String password;
