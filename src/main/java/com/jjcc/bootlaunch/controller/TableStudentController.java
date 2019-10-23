@@ -64,13 +64,9 @@ public class TableStudentController {
     @GetMapping("/student/pages/{page}")
     public AjaxResponse listPageStudent(@PathVariable Integer page) {
 
-        IPage<TableStudent> objectPage = new Page<>(page, 2, true);
+        IPage<TableStudent> objectPage = new Page<>(page, 10, true);
 
         objectPage = tableStudentService.page(objectPage);
-
-//        TableStudent byId = tableStudentService.getById(5);
-
-//        IPage<TableStudent> tableStudentIPage = tableStudentService.selectPage(objectPage);
 
         return AjaxResponse.success(objectPage);
     }

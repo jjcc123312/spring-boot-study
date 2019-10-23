@@ -1,4 +1,4 @@
-package com.jjcc.bootlaunch.common;
+package com.jjcc.bootlaunch.common.database;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
