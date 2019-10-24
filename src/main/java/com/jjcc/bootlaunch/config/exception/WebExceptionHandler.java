@@ -1,5 +1,6 @@
 package com.jjcc.bootlaunch.config.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @className WebExceptionHandler.java
  * @createTime 2019年10月19日 15:35:00
  */
+@Slf4j
 @ControllerAdvice
 public class WebExceptionHandler {
 
@@ -31,6 +33,7 @@ public class WebExceptionHandler {
     public AjaxResponse customException(CustomException e) {
         if (e.getCode() == CustomExceptionType.SYSTEM_ERROR.getCode()) {
             //系统异常可以做持久化处理，方便运维人员处理
+            log.error("自定义异常-------->", e);
         }
 
         return AjaxResponse.error(e);
@@ -40,7 +43,7 @@ public class WebExceptionHandler {
     @ResponseBody
     public AjaxResponse exception(Exception e) {
         //针对位置异常可以做持久化处理，方便运维人员处理
-
+        log.error("exception-------->", e);
         return AjaxResponse.error(new CustomException(CustomExceptionType.OTHER_ERROR, "未知异常"));
     }
 
@@ -73,6 +76,19 @@ public class WebExceptionHandler {
     public AjaxResponse handlerBindException(MethodArgumentNotValidException ex) {
         FieldError fieldError = ex.getBindingResult().getFieldError();
         return AjaxResponse.error(new CustomException(CustomExceptionType.USER_INPUT_ERROR, fieldError.getDefaultMessage()));
+    }
+
+    /**
+     * 异步请求超时异常
+     * @title customAsyncRequestTimeoutException
+     * @author Jjcc
+     * @return com.jjcc.bootlaunch.config.exception.AjaxResponse
+     * @createTime 2019/10/24 9:09
+     */
+    @ExceptionHandler(CustomAsyncRequestTimeoutException.class)
+    @ResponseBody
+    public AjaxResponse customAsyncRequestTimeoutException(CustomAsyncRequestTimeoutException e) {
+        return AjaxResponse.error(e);
     }
 }
 

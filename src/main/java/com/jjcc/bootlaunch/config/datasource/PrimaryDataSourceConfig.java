@@ -26,7 +26,7 @@ import javax.sql.DataSource;
  */
 @Slf4j
 @Configuration
-@MapperScan(value = "com.jjcc.bootlaunch.generator.test1*", sqlSessionTemplateRef = "primarySqlSessionTemplate")
+@MapperScan(basePackages = "com.jjcc.bootlaunch.generator.test1*", sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDataSourceConfig {
 
 

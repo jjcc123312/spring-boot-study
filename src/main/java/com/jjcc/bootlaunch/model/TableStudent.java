@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
@@ -18,12 +18,13 @@ import lombok.experimental.Accessors;
  * @since 2019-10-20
  */
 @Data
+@Builder
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("table_student")
 public class TableStudent extends Model<TableStudent> {
 
-    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -41,5 +42,7 @@ public class TableStudent extends Model<TableStudent> {
     protected Serializable pkVal() {
         return this.id;
     }
+
+
 
 }

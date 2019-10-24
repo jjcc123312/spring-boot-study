@@ -1,16 +1,21 @@
 package com.jjcc.bootlaunch.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjcc.bootlaunch.config.exception.CustomException;
+import com.jjcc.bootlaunch.config.exception.CustomExceptionType;
 import com.jjcc.bootlaunch.generator.test1.TableStudentMapper;
 import com.jjcc.bootlaunch.model.TableStudent;
 import com.jjcc.bootlaunch.service.TableStudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * <p>
@@ -23,17 +28,33 @@ import java.util.List;
 @Service
 public class TableStudentServiceImpl extends ServiceImpl<TableStudentMapper, TableStudent> implements TableStudentService {
 
-    @Autowired
+    @Resource
     private TableStudentMapper tableStudentMapper;
 
     @Override
     public List<TableStudent> selectAll() {
-        return tableStudentMapper.selectList(null);
+        List<TableStudent> list;
+        try {
+
+            list = tableStudentMapper.selectAll();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException(CustomExceptionType.SYSTEM_ERROR, "selectAll方法出现异常");
+        }
+        return list;
     }
 
     @Override
-    public IPage<TableStudent> selectPage(Page<TableStudent> page) {
-        return tableStudentMapper.selectPageVo(page);
+    public TableStudent selectById(Serializable id) {
+        return tableStudentMapper.selectById(id);
     }
 
+    @Transactional(rollbackFor = Exception.class, transactionManager = "transactionManager" )
+    @Async("asyncPoolTaskExecutor")
+    @Override
+    public Future<Boolean> saveStudentList(List<TableStudent> list) throws Exception {
+        boolean b = saveBatch(list, 1000);
+        return new AsyncResult<>(b);
+    }
 }

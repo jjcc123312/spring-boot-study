@@ -14,6 +14,7 @@ public enum CustomExceptionType {
      * 异常类别固化初始化
      */
     USER_INPUT_ERROR(400, "用户输入异常"),
+    REQUEST_TIME_OUT(408, "请求超时"),
     SYSTEM_ERROR(500, "系统异常"),
     OTHER_ERROR(999, "其它异常");
 

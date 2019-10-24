@@ -1,11 +1,11 @@
 package com.jjcc.bootlaunch.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jjcc.bootlaunch.model.TableStudent;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jjcc.bootlaunch.model.TableStudent;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * <p>
@@ -28,12 +28,23 @@ public interface TableStudentService extends IService<TableStudent> {
     List<TableStudent> selectAll();
 
     /**
-     * 学生分页
-     * @title selectPage
+     * 根据Id查询数据
+     * @title selectById
      * @author Jjcc
-     * @param page
-     * @return com.baomidou.mybatisplus.core.metadata.IPage<com.jjcc.bootlaunch.model.TableStudent>
-     * @createTime 2019/10/21 23:51
+     * @param id
+     * @return com.jjcc.bootlaunch.model.TableStudent
+     * @createTime 2019/10/24 14:52
      */
-    IPage<TableStudent> selectPage(Page<TableStudent> page);
+    TableStudent selectById(Serializable id);
+
+    /**
+     * 添加数据
+     * @title saveStudentList
+     * @author Jjcc
+     * @param list
+     * @return boolean
+     * @createTime 2019/10/24 15:22
+     */
+    Future<Boolean> saveStudentList(List<TableStudent> list) throws Exception;
+
 }

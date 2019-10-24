@@ -23,7 +23,7 @@ import javax.sql.DataSource;
  * @createTime 2019年10月10日 11:09:00
  */
 @Configuration
-@MapperScan(value = "com.jjcc.bootlaunch.generator.test2*",
+@MapperScan(basePackages = "com.jjcc.bootlaunch.generator.test2*",
         sqlSessionTemplateRef = "secondarySqlSessionTemplate")
 public class SecondaryDataSourceConfig {
 

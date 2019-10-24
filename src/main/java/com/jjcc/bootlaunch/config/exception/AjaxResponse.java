@@ -53,6 +53,24 @@ public class AjaxResponse {
         }
         return resultBean;
     }
+
+
+    /**
+     * 异步请求超时
+     * @title error
+     * @author Jjcc
+     * @param e
+     * @return com.jjcc.bootlaunch.config.exception.AjaxResponse
+     * @createTime 2019/10/24 9:22
+     */
+    public static AjaxResponse error(CustomAsyncRequestTimeoutException e) {
+        AjaxResponse resultBean = new AjaxResponse();
+        resultBean.setIsok(false);
+        resultBean.setCode(e.getCode());
+        resultBean.setMessage(e.getUri() + "，请求超时");
+        return resultBean;
+    }
+
     /**
      * 请求成功时的响应数据封装，没有响应数据
      * @title success
