@@ -26,7 +26,7 @@ import javax.sql.DataSource;
  */
 @Slf4j
 @Configuration
-@MapperScan(value = "com.jjcc.bootlaunch.generator.test1*", sqlSessionTemplateRef = "primarySqlSessionTemplate")
+@MapperScan(basePackages = "com.jjcc.bootlaunch.generator.test1", sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDataSourceConfig {
 
 
@@ -44,10 +44,10 @@ public class PrimaryDataSourceConfig {
                                                    @Qualifier("globalConfig") GlobalConfig globalConfig) throws Exception {
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        //指定mapper.xml路径
+//        //指定mapper.xml路径
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().
                 getResources(mapperLocations));
-
+//
         bean.setTypeAliasesPackage(typeAliasesPackage);
 
         bean.setConfiguration(configuration);
