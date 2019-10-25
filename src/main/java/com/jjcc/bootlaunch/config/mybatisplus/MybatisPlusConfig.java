@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Scope;
 
 /**
  * mybatis-plus配置文件
@@ -70,15 +71,18 @@ public class MybatisPlusConfig {
      * @return com.baomidou.mybatisplus.core.MybatisConfiguration
      * @createTime 2019/10/22 9:23
      */
+    @Scope("prototype")
     @Bean("mybatisConfiguration")
     @ConfigurationProperties(prefix = "mybatis-plus.configuration")
-    public MybatisConfiguration mybatisConfiguration (@Qualifier("paginationInterceptor") PaginationInterceptor paginationInterceptor,
+    public MybatisConfiguration mybatisConfiguration(@Qualifier("paginationInterceptor") PaginationInterceptor paginationInterceptor,
                                                       @Qualifier("performanceInterceptor") PerformanceInterceptor performanceInterceptor) {
         MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
         mybatisConfiguration.addInterceptor(paginationInterceptor);
         mybatisConfiguration.addInterceptor(performanceInterceptor);
         return mybatisConfiguration;
     }
+
+    @Scope("prototype")
     @Bean("globalConfig")
     @ConfigurationProperties(prefix = "mybatis-plus.global-config")
     public GlobalConfig globalConfig() {

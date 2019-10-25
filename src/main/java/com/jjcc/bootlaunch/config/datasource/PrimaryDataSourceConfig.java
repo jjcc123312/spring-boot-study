@@ -44,10 +44,10 @@ public class PrimaryDataSourceConfig {
                                                    @Qualifier("globalConfig") GlobalConfig globalConfig) throws Exception {
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        //指定mapper.xml路径
+//        //指定mapper.xml路径
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().
                 getResources(mapperLocations));
-
+//
         bean.setTypeAliasesPackage(typeAliasesPackage);
 
         bean.setConfiguration(configuration);
