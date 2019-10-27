@@ -13,7 +13,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Profile({"dev","test"})
 @Configuration
-@EnableSwagger2
 public class Swagger1 {
 
 	@Bean
