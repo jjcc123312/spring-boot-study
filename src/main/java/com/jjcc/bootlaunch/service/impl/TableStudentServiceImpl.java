@@ -3,14 +3,13 @@ package com.jjcc.bootlaunch.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjcc.bootlaunch.config.exception.CustomException;
 import com.jjcc.bootlaunch.config.exception.CustomExceptionType;
-import com.jjcc.bootlaunch.generator.test1.TableStudentMapper;
+import com.jjcc.bootlaunch.generator.test1.TableStudentMasterMapper;
 import com.jjcc.bootlaunch.model.TableStudent;
 import com.jjcc.bootlaunch.service.TableStudentService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -26,17 +25,17 @@ import java.util.concurrent.Future;
  * @since 2019-10-20
  */
 @Service
-public class TableStudentServiceImpl extends ServiceImpl<TableStudentMapper, TableStudent> implements TableStudentService {
+public class TableStudentServiceImpl extends ServiceImpl<TableStudentMasterMapper, TableStudent> implements TableStudentService {
 
     @Resource
-    private TableStudentMapper tableStudentMapper;
+    private TableStudentMasterMapper tableStudentMasterMapper;
 
     @Override
     public List<TableStudent> selectAll() {
         List<TableStudent> list;
         try {
 
-            list = tableStudentMapper.selectAll();
+            list = tableStudentMasterMapper.selectAll();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,14 +46,20 @@ public class TableStudentServiceImpl extends ServiceImpl<TableStudentMapper, Tab
 
     @Override
     public TableStudent selectById(Serializable id) {
-        return tableStudentMapper.selectById(id);
+        return tableStudentMasterMapper.selectById(id);
     }
 
     @Transactional(rollbackFor = Exception.class, transactionManager = "transactionManager" )
     @Async("asyncPoolTaskExecutor")
     @Override
-    public Future<Boolean> saveStudentList(List<TableStudent> list) throws Exception {
-        boolean b = saveBatch(list, 1000);
-        return new AsyncResult<>(b);
+    public Boolean saveStudentList(List<TableStudent> list)  {
+        try {
+            System.out.println("name：" + Thread.currentThread().getName());
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        tableStudentMasterMapper.saveStudentList(list);
+        return true;
     }
 }

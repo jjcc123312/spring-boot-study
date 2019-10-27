@@ -9,7 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +32,8 @@ public class AsyncInterfaceController {
 
     private TableStudentService tableStudentService;
 
-    public AsyncInterfaceController(@Autowired @Qualifier("tableStudentServiceImpl") TableStudentService tableStudentService1) {
+    @Autowired
+    public AsyncInterfaceController(TableStudentService tableStudentService1) {
         this.tableStudentService = tableStudentService1;
     }
 
@@ -75,31 +75,55 @@ public class AsyncInterfaceController {
 
     @ApiOperation("异步请求添加数据")
     @PostMapping("/student")
-    public Callable saveStudent() {
+    public AjaxResponse saveStudent() {
 
-        return () -> {
+        TableStudent tableStudent = new TableStudent(null, "Jjcc", "男", 22, 2);
 
-            TableStudent tableStudent = new TableStudent(null, "Jjcc", "男", 22, 2);
+        List<TableStudent> objects = new ArrayList<>();
 
-            List<TableStudent> objects = new ArrayList<TableStudent>(){
-                {
-                    add(tableStudent);
-                    add(tableStudent);
-                }
-            };
-            boolean b;
-            List<TableStudent> list;
-            try {
-                b = tableStudentService.saveBatch(objects);
-//                tableStudentService.save(tableStudent);
+        for (int i = 0; i < 1; i++) {
+            objects.add(tableStudent);
+        }
 
-                list = tableStudentService.selectAll();
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new CustomException(CustomExceptionType.SYSTEM_ERROR, "saveStudent出现异常");
-            }
-            return AjaxResponse.success(list);
-        };
+        boolean b;
+        List<TableStudent> list;
+
+        try {
+            tableStudentService.saveStudentList(objects);
+//                b = tableStudentService.save(tableStudent);
+//                b = booleanFuture.get();
+//                list = tableStudentService.list();
+        } catch (CustomException e) {
+            e.printStackTrace();
+            throw new CustomException(CustomExceptionType.SYSTEM_ERROR, "saveStudent出现异常");
+        }
+        log.info("111111111111111");
+        return AjaxResponse.success();
+
+//        return () -> {
+//
+//            TableStudent tableStudent = new TableStudent(null, "Jjcc", "男", 22, 2);
+//
+//            List<TableStudent> objects = new ArrayList<>();
+//
+//            for (int i = 0; i < 1000; i++) {
+//                objects.add(tableStudent);
+//            }
+//
+//            boolean b;
+//            List<TableStudent> list;
+//            try {
+//                tableStudentService.saveStudentList(objects);
+////                b = tableStudentService.save(tableStudent);
+////                b = booleanFuture.get();
+////                list = tableStudentService.list();
+//            } catch (CustomException e) {
+//                e.printStackTrace();
+//                throw new CustomException(CustomExceptionType.SYSTEM_ERROR, "saveStudent出现异常");
+//            }
+//            log.info("111111111111111");
+//            return AjaxResponse.success();
+//        };
     }
 
 

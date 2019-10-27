@@ -45,6 +45,6 @@ public interface TableStudentService extends IService<TableStudent> {
      * @return boolean
      * @createTime 2019/10/24 15:22
      */
-    Future<Boolean> saveStudentList(List<TableStudent> list) throws Exception;
+    Boolean saveStudentList(List<TableStudent> list);
 
 }

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * 异步请求配置
+ * 异步请求配置类
  * @author Jjcc
  * @version 1.0.0
  * @className RequestAsyncConfig.java
@@ -33,6 +33,12 @@ public class RequestAsyncConfig implements WebMvcConfigurer {
         taskExecutor.setThreadNamePrefix("callable-");
         // 线程池对拒绝任务（无线程可用）的处理策略，默认为CallerRunsPolicy
         taskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        //用以设置线程池关闭的时候是否等待队列中的任务执行完成在关闭线程池。
+        //true为等待，false为不等待。默认为false
+        taskExecutor.setWaitForTasksToCompleteOnShutdown(true);
+        //当waitForToCompleteOnShutdown为true时，设置等待任务完成的时间，超过这个时间队列中的任务还没有完成，就销毁线程池；
+        taskExecutor.setAwaitTerminationSeconds(60);
+
         taskExecutor.initialize();
         return taskExecutor;
     }

@@ -1,7 +1,5 @@
 package com.jjcc.bootlaunch.config.async;
 
-import org.springframework.stereotype.Component;
-
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 

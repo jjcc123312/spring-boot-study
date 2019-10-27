@@ -64,6 +64,7 @@ public class MybatisPlusConfig {
 
     /**
      * 加载配置文件中mybatis-plus的配置信息，配置多数据源所需要
+     * 这里获取bean的方式为多例，原因是多数据源集成mybatis-plus时，调用自带接口时，无法区分哪个数据源（MybatisConfiguration方法）；
      * @title mybatisConfiguration
      * @author Jjcc
      * @param paginationInterceptor 分页插件
