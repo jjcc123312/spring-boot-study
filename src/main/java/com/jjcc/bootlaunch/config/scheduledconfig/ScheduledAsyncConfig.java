@@ -1,4 +1,4 @@
-package com.jjcc.bootlaunch.config.async;
+package com.jjcc.bootlaunch.config.scheduledconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +36,7 @@ public class ScheduledAsyncConfig implements SchedulingConfigurer {
     public TaskScheduler scheduledTaskExecutor() {
         ThreadPoolTaskScheduler threadPoolTaskExecutor = new ThreadPoolTaskScheduler();
         threadPoolTaskExecutor.setPoolSize(20);
-        threadPoolTaskExecutor.setThreadNamePrefix("oKong-Executor-");
+        threadPoolTaskExecutor.setThreadNamePrefix("Schedule-Executor-");
         threadPoolTaskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         //调度器shutdown被调用时等待当前被调度的任务完成
         threadPoolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
