@@ -1,6 +1,8 @@
 package com.jjcc.bootlaunch.config.exception;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Jjcc
@@ -9,6 +11,8 @@ import lombok.Data;
  * @createTime 2019年10月17日 23:24:00
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AjaxResponse {
 
     /**
@@ -28,9 +32,7 @@ public class AjaxResponse {
      */
     private Object data;
 
-    private AjaxResponse() {
 
-    }
 
     /**
      * 请求出现异常时的响应

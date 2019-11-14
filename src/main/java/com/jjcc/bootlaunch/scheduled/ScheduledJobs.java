@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @createTime 2019年10月27日 21:16:00
  */
 @Slf4j
-@Component
+//@Component
 public class ScheduledJobs {
 
     /**
@@ -22,7 +22,7 @@ public class ScheduledJobs {
      * @return void
      * @createTime 2019/10/27 21:18
      */
-    @Scheduled(fixedDelay = 5000)
+//    @Scheduled(fixedDelay = 5000)
     public void fixedDelayJob() {
         String name = Thread.currentThread().getName();
         log.info(name + "：fixedDelayJob定时任务执行");
@@ -36,7 +36,7 @@ public class ScheduledJobs {
      * @return void
      * @createTime 2019/10/27 21:20
      */
-    @Scheduled(fixedRate = 5000)
+//    @Scheduled(fixedRate = 5000)
     public void  fixedRateJob() {
         String name = Thread.currentThread().getName();
         log.info(name + "：fixedRateJob定时任务执行");
@@ -50,7 +50,7 @@ public class ScheduledJobs {
      * @return void
      * @createTime 2019/10/27 21:24
      */
-    @Scheduled(cron = "0/20 * * * * ?")
+//    @Scheduled(cron = "0/20 * * * * ?")
     public void cronJob() {
         String name = Thread.currentThread().getName();
         log.info(name + "：cronJob定时任务执行");

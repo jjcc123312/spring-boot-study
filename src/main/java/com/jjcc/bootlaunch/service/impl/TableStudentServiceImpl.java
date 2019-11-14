@@ -3,9 +3,11 @@ package com.jjcc.bootlaunch.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjcc.bootlaunch.config.exception.CustomException;
 import com.jjcc.bootlaunch.config.exception.CustomExceptionType;
+import com.jjcc.bootlaunch.generator.redisdao.TableStudentDAO;
 import com.jjcc.bootlaunch.generator.test1.TableStudentMasterMapper;
 import com.jjcc.bootlaunch.model.TableStudent;
 import com.jjcc.bootlaunch.service.TableStudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,12 @@ public class TableStudentServiceImpl extends ServiceImpl<TableStudentMasterMappe
 
     @Resource
     private TableStudentMasterMapper tableStudentMasterMapper;
+
+    private TableStudentDAO tableStudentDAO;
+
+    public TableStudentServiceImpl(TableStudentDAO tableStudentDAO) {
+        this.tableStudentDAO = tableStudentDAO;
+    }
 
     @Override
     public List<TableStudent> selectAll() {
@@ -62,4 +70,10 @@ public class TableStudentServiceImpl extends ServiceImpl<TableStudentMasterMappe
         tableStudentMasterMapper.saveStudentList(list);
         return true;
     }
+
+    @Override
+    public List<Object> redisPipeLineTestMethod() {
+        return tableStudentDAO.redisPipelineMethod();
+    }
+
 }

@@ -47,4 +47,14 @@ public interface TableStudentService extends IService<TableStudent> {
      */
     Boolean saveStudentList(List<TableStudent> list);
 
+
+    /**
+     * springboot使用pipeline批量操作redis
+     * @title redisPipeLineTestMethod
+     * @author Jjcc
+     * @return java.util.List<java.lang.Object>
+     * @createTime 2019/11/13 21:55
+     */
+    List<Object> redisPipeLineTestMethod();
+
 }

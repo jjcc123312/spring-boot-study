@@ -10,7 +10,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   profiles:
-    include: family
+    include: family,redis
 
   datasource:
     type: com.alibaba.druid.pool.xa.DruidXADataSource

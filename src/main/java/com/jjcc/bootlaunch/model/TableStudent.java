@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Data
 @Builder
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("table_student")
 public class TableStudent extends Model<TableStudent> {

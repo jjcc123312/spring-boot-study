@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ public class TableStudentController {
         this.tableStudentService = tableStudentService;
     }
 
+    @Cacheable(value = {"student1", "student2"}, key = "1")
     @ApiOperation("获取所有学生信息")
     @GetMapping("/student")
     public AjaxResponse getTableStud() {
