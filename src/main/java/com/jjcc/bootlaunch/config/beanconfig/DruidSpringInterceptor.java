@@ -27,8 +27,7 @@ public class DruidSpringInterceptor {
      */
     @Bean
     public DruidStatInterceptor druidStatInterceptor() {
-        DruidStatInterceptor dsInterceptor = new DruidStatInterceptor();
-        return dsInterceptor;
+        return new DruidStatInterceptor();
     }
 
     /**

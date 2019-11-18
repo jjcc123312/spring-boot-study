@@ -28,6 +28,15 @@ public interface TableStudentService extends IService<TableStudent> {
     List<TableStudent> selectAll();
 
     /**
+     * 查找所有学生
+     * @title selectAll
+     * @author Jjcc
+     * @return java.util.List<com.jjcc.bootlaunch.model.TableStudent>
+     * @createTime 2019/10/21 23:50
+     */
+    List<TableStudent> selectAllTwo();
+
+    /**
      * 根据Id查询数据
      * @title selectById
      * @author Jjcc
@@ -56,5 +65,15 @@ public interface TableStudentService extends IService<TableStudent> {
      * @createTime 2019/11/13 21:55
      */
     List<Object> redisPipeLineTestMethod();
+
+    /**
+     * 添加数据
+     * @title saveStudent
+     * @author Jjcc
+     * @param tableStudent
+     * @return boolean
+     * @createTime 2019/11/18 9:28
+     */
+    int saveStudent(TableStudent tableStudent);
 
 }

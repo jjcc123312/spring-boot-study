@@ -30,7 +30,6 @@ public class DruidConfig {
      * @createTime 2019/10/11 15:33
      */
     @Bean
-    @Primary
     public ServletRegistrationBean druidServlet() {
         ServletRegistrationBean reg = new ServletRegistrationBean();
         reg.setServlet(new StatViewServlet());
@@ -60,7 +59,6 @@ public class DruidConfig {
      * @createTime 2019/10/11 15:33
      */
     @Bean
-    @Primary
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());

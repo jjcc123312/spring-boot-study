@@ -1,7 +1,8 @@
-package com.jjcc.bootlaunch.generator.test1;
+package com.jjcc.bootlaunch.generator.mysqldao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jjcc.bootlaunch.model.TableStudent;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -30,4 +31,7 @@ public interface TableStudentMasterMapper extends BaseMapper<TableStudent> {
      */
     int saveStudentList(@Param("students") List<TableStudent> students);
 
+    @Insert("insert into table_student (id, name, sex, age ,class_ids) " +
+            "values (null, #{students.name}, #{students.sex}, #{students.age}, #{students.classIds})")
+    int insertStudent(@Param("students") TableStudent student);
 }

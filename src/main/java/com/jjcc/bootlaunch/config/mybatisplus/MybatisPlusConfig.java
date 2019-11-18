@@ -62,33 +62,33 @@ public class MybatisPlusConfig {
         return new LogicSqlInjector();
     }
 
-    /**
-     * 加载配置文件中mybatis-plus的配置信息，配置多数据源所需要
-     * 这里获取bean的方式为多例，原因是多数据源集成mybatis-plus时，调用自带接口时，无法区分哪个数据源（MybatisConfiguration方法）；
-     * @title mybatisConfiguration
-     * @author Jjcc
-     * @param paginationInterceptor 分页插件
-     * @param performanceInterceptor SQL执行效率插件
-     * @return com.baomidou.mybatisplus.core.MybatisConfiguration
-     * @createTime 2019/10/22 9:23
-     */
-    @Scope("prototype")
-    @Bean("mybatisConfiguration")
-    @ConfigurationProperties(prefix = "mybatis-plus.configuration")
-    public MybatisConfiguration mybatisConfiguration(@Qualifier("paginationInterceptor") PaginationInterceptor paginationInterceptor,
-                                                      @Qualifier("performanceInterceptor") PerformanceInterceptor performanceInterceptor) {
-        MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
-        mybatisConfiguration.addInterceptor(paginationInterceptor);
-        mybatisConfiguration.addInterceptor(performanceInterceptor);
-        return mybatisConfiguration;
-    }
-
-    @Scope("prototype")
-    @Bean("globalConfig")
-    @ConfigurationProperties(prefix = "mybatis-plus.global-config")
-    public GlobalConfig globalConfig() {
-        return new GlobalConfig();
-    }
+//    /**
+//     * 加载配置文件中mybatis-plus的配置信息，配置多数据源所需要
+//     * 这里获取bean的方式为多例，原因是多数据源集成mybatis-plus时，调用自带接口时，无法区分哪个数据源（MybatisConfiguration方法）；
+//     * @title mybatisConfiguration
+//     * @author Jjcc
+//     * @param paginationInterceptor 分页插件
+//     * @param performanceInterceptor SQL执行效率插件
+//     * @return com.baomidou.mybatisplus.core.MybatisConfiguration
+//     * @createTime 2019/10/22 9:23
+//     */
+//    @Scope("prototype")
+//    @Bean("mybatisConfiguration")
+//    @ConfigurationProperties(prefix = "mybatis-plus.configuration")
+//    public MybatisConfiguration mybatisConfiguration(@Qualifier("paginationInterceptor") PaginationInterceptor paginationInterceptor,
+//                                                      @Qualifier("performanceInterceptor") PerformanceInterceptor performanceInterceptor) {
+//        MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
+//        mybatisConfiguration.addInterceptor(paginationInterceptor);
+//        mybatisConfiguration.addInterceptor(performanceInterceptor);
+//        return mybatisConfiguration;
+//    }
+//
+//    @Scope("prototype")
+//    @Bean("globalConfig")
+//    @ConfigurationProperties(prefix = "mybatis-plus.global-config")
+//    public GlobalConfig globalConfig() {
+//        return new GlobalConfig();
+//    }
 
 
 }
