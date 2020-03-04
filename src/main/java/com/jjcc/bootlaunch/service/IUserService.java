@@ -63,4 +63,6 @@ public interface IUserService {
      * @createTime 2019/10/19 21:17
      */
     List<User> selectUserDispose(User user);
+
+    void simpleTest(String name);
 }

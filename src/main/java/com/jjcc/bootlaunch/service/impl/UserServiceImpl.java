@@ -5,11 +5,16 @@ import com.jjcc.bootlaunch.config.exception.CustomExceptionType;
 import com.jjcc.bootlaunch.generator.UserMapper;
 import com.jjcc.bootlaunch.model.User;
 import com.jjcc.bootlaunch.service.IUserService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Jjcc
@@ -70,5 +75,29 @@ public class UserServiceImpl implements IUserService {
 //            throw new CustomException(CustomExceptionType.SYSTEM_ERROR, "方法selectUserDispose有问题");
         }
         return userList;
+    }
+
+
+    Lock lock = new ReentrantLock();
+    Condition condition = lock.newCondition();
+    int a = 123;
+//    @Async
+    @Override
+    public void simpleTest(String name) {
+        lock.lock();
+        try {
+            if ("jjcc".equals(name)) {
+                Thread.sleep(5000);
+                System.out.println("!!!!!!!!!!!!!!!!：" + a);
+            } else {
+                a = 123;
+                System.out.println("????????????????：" + a);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+
     }
 }
