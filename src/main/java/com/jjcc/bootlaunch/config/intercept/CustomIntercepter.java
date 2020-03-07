@@ -20,7 +20,7 @@ public class CustomIntercepter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("Controller执行之前调用");
-        //返回flase则请求中断；
+        //返回false则请求中断；
         return true;
     }
 

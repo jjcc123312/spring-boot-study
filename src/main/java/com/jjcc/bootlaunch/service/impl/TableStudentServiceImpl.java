@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @author Jjcc
  * @since 2019-10-21
  */
-@Service
+@Service()
 public class TableStudentServiceImpl extends ServiceImpl<TableStudentMapper, TableStudent> implements TableStudentService {
 
 }
